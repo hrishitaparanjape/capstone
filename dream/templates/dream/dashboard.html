@@ -1,0 +1,51 @@
+{% extends "dream/layout.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+    <div style="margin-top: 20px; font-family: 'Trebuchet MS', sans-serif;">
+        <h2 style="color: #03376a; text-align: center;">Dashboard</h2>
+        
+        <form method="get" action="{% url 'dashboard' %}">
+            <div class="form-group">
+                <label for="tags">Filter by Tags:</label>
+                <select class="form-control" id="tags" name="tags" multiple="multiple">
+                    {% for tag in tags %}
+                        <option value="{{ tag.id }}">{{ tag.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="emotional_state">Filter by Emotional State:</label>
+                <select class="form-control" id="emotional_state" name="emotional_state">
+                    <option value="">All</option>
+                    <option value="happy">Happy</option>
+                    <option value="scared">Scared</option>
+                    <option value="confused">Confused</option>
+                    <option value="sad">Sad</option>
+                    <option value="angry">Angry</option>
+                    <option value="excited">Excited</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+
+        <div style="margin-top: 20px;">
+            {% for dream in dreams %}
+                <div style="border: 1px solid #300258; background-color: #f7e3fd; padding: 15px; border-radius: 10px; margin-bottom: 10px;">
+                    <h3>{{ dream.title }}</h3>
+                    <p><strong>Date:</strong> {{ dream.date }}</p>
+                    <p><strong>Description:</strong> {{ dream.description }}</p>
+                    <p><strong>Emotional State:</strong> {{ dream.get_emotional_state_display }}</p>
+                    <p><strong>Tags:</strong> 
+                        {% for tag in dream.tags.all %}
+                            <span class="badge badge-primary">{{ tag.name }}</span>
+                        {% endfor %}
+                    </p>
+                </div>
+            {% empty %}
+                <p style="text-align: center;">No dreams to display.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

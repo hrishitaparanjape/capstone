@@ -3,19 +3,17 @@
 {% block title %}All Dreams{% endblock %}
 
 {% block body %}
-    <div style="margin-top: 20px; font-family: 'Trebuchet MS', sans-serif;">
-        <h2 style="color: #03376a; text-align: center;">All Dreams</h2>
+    <div style="margin-top: 20px;">
+        <h2 style="color: #5e35b1; text-align: center; font-family: 'Comfortaa', cursive;">All Dreams <span class="emoji">💭</span></h2>
         {% for dream in dreams %}
-            <div style="border: 1px solid #300258; background-color: #f7e3fd; padding: 15px; border-radius: 10px; margin-bottom: 10px;">
-                <h3>{{ dream.title }}</h3>
+            <div style="border: 1px solid #5e35b1; background-color: #f3e5f5; padding: 15px; border-radius: 10px; margin-bottom: 10px; font-family: 'DM Sans', sans-serif;">
+                <h3 style="color: #03376a;">{{ dream.title }}</h3>
                 <p><strong>Date:</strong> {{ dream.date }}</p>
                 <p><strong>Description:</strong> {{ dream.description }}</p>
                 <p><strong>Emotional State:</strong> {{ dream.get_emotional_state_display }}</p>
             </div>
         {% empty %}
-            <p style="text-align: center;">No dreams to display.</p>
+            <p style="text-align: center; font-family: 'Comfortaa', cursive;">No dreams to display. <span class="emoji">😴</span></p>
         {% endfor %}
     </div>
-    
-
 {% endblock %}

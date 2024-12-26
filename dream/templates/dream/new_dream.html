@@ -3,32 +3,34 @@
 {% block title %}New Dream{% endblock %}
 
 {% block body %}
-<h2>New Dream</h2>
-<form action="{% url 'new_dream' %}" method="post">
-    {% csrf_token %}
-    <div class="form-group">
-        <label for="title">Title:</label>
-        <input type="text" class="form-control" id="title" name="title" required>
+    <div style="margin-top: 20px;">
+        <h2 style="color: #5e35b1; text-align: center; font-family: 'Comfortaa', cursive;">New Dream <span class="emoji">🌟</span></h2>
+        <form method="post" action="{% url 'new_dream' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="title" style="font-family: 'Comfortaa', cursive;">Title:</label>
+                <input type="text" class="form-control" id="title" name="title" required style="font-family: 'DM Sans', sans-serif;">
+            </div>
+            <div class="form-group">
+                <label for="date" style="font-family: 'Comfortaa', cursive;">Date:</label>
+                <input type="date" class="form-control" id="date" name="date" required style="font-family: 'DM Sans', sans-serif;">
+            </div>
+            <div class="form-group">
+                <label for="emotional_state" style="font-family: 'Comfortaa', cursive;">Emotional State:</label>
+                <select class="form-control" id="emotional_state" name="emotional_state" required style="font-family: 'DM Sans', sans-serif;">
+                    <option value="happy">Happy <span class="emoji">😊</span></option>
+                    <option value="scared">Scared <span class="emoji">😱</span></option>
+                    <option value="confused">Confused <span class="emoji">😕</span></option>
+                    <option value="sad">Sad <span class="emoji">😢</span></option>
+                    <option value="angry">Angry <span class="emoji">😡</span></option>
+                    <option value="excited">Excited <span class="emoji">😃</span></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="description" style="font-family: 'Comfortaa', cursive;">Description:</label>
+                <textarea class="form-control" id="description" name="description" rows="5" required style="font-family: 'DM Sans', sans-serif;"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="background-color: #81d4fa; color: #03376a; font-family: 'Comfortaa', cursive;">Save Dream <span class="emoji">💾</span></button>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea class="form-control" id="description" name="description" required></textarea>
-    </div>
-    <div class="form-group">
-        <label for="date">Date:</label>
-        <input type="date" class="form-control" id="date" name="date" required>
-    </div>
-    <div class="form-group">
-        <label for="emotional_state">Emotional State:</label>
-        <select class="form-control" id="emotional_state" name="emotional_state" required>
-            <option value="happy">Happy</option>
-            <option value="scared">Scared</option>
-            <option value="confused">Confused</option>
-            <option value="sad">Sad</option>
-            <option value="angry">Angry</option>
-            <option value="excited">Excited</option>
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Save Dream</button>
-</form>
 {% endblock %}

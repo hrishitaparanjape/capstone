@@ -6,33 +6,63 @@
         <title>{% block title %}Dream Journal{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link href="{% static 'dream/styles.css' %}" rel="stylesheet">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=DM+Sans:wght@400;700&display=swap');
+
+            body {
+                font-family: 'DM Sans', sans-serif;
+                background-color: #f3e5f5; /* light purple */
+                color: #03376a; /* dark blue */
+            }
+
+            .navbar {
+                background-color: #5e35b1; /* dark purple */
+            }
+
+            .navbar-brand, .nav-link {
+                color: #03376a !important;
+                font-family: 'Comfortaa', cursive;
+            }
+
+            .navbar-brand:hover, .nav-link:hover {
+                color: #81d4fa !important; /* light blue */
+            }
+        </style>
     </head>
     <body>
+    <style>
+        .nav-link {
+        color: #03376a !important; /* dark blue */
+        }
 
+        .nav-link:hover {
+        color: #81d4fa !important; /* light blue */
+        }
+    </style>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="{% url 'index' %}">Dream Journal</a>
+            <a class="navbar-brand" href="{% url 'index' %}">Dream Journal<span class="emoji">🌙</span></a>
           
             <div>
               <ul class="navbar-nav mr-auto">
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'index' %}">All Dreams</a>
+                        <a class="nav-link" href="{% url 'index' %}">All Dreams<span class="emoji">📜</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'new_dream' %}">New Dream</a>
+                        <a class="nav-link" href="{% url 'new_dream' %}">New Dream <span class="emoji">🌟</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+                        <a class="nav-link" href="{% url 'dashboard' %}">Dashboard <span class="emoji">📊</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out<span class="emoji">🚪</span></a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                        <a class="nav-link" href="{% url 'login' %}">Log In<span class="emoji">🔑</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        <a class="nav-link" href="{% url 'register' %}">Register<span class="emoji">📝</span></a>
                     </li>
                 {% endif %}
               </ul>

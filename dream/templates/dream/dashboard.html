@@ -3,43 +3,54 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block body %}
-    <div style="margin-top: 20px; font-family: 'Trebuchet MS', sans-serif;">
-        <h2 style="color: #03376a; text-align: center;">Dashboard</h2>
-        <div id="streak-counter" style="text-align: center; font-size: 20px; margin-bottom: 20px;">
-            Streak: <span id="streak">0</span> days
-        </div>
+<div style="margin-top: 20px;">
+    <h2 style="color: #5e35b1; text-align: center; font-family: 'Comfortaa', cursive;">Dashboard <span class="emoji">📊</span></h2>
+    <div style="text-align: center; margin-top: 20px;">
+        <button id="counterButton" style="background-color: #8cc4f5;">Did you log your Dream? <span class="emoji">🌙</span></button>
+        <p>Streak: <span class="emoji">🔥</span></p>
+        <span id="counter">0</span>
+    </div>
         <form method="get" action="{% url 'dashboard' %}">
             <div class="form-group">
-                <label for="emotional_state">Filter by Emotional State:</label>
-                <select class="form-control" id="emotional_state" name="emotional_state">
+                <label for="emotional_state" style="font-family: 'Comfortaa', cursive;">Filter by Emotional State:</label>
+                <select class="form-control" id="emotional_state" name="emotional_state" style="font-family: 'DM Sans', sans-serif;">
                     <option value="">All</option>
-                    <option value="happy">Happy</option>
-                    <option value="scared">Scared</option>
-                    <option value="confused">Confused</option>
-                    <option value="sad">Sad</option>
-                    <option value="angry">Angry</option>
-                    <option value="excited">Excited</option>
+                    <option value="happy">Happy <span class="emoji">😊</span></option>
+                    <option value="scared">Scared <span class="emoji">😱</span></option>
+                    <option value="confused">Confused <span class="emoji">😕</span></option>
+                    <option value="sad">Sad <span class="emoji">😢</span></option>
+                    <option value="angry">Angry <span class="emoji">😡</span></option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Filter</button>
         </form>
 
         <div style="margin-top: 20px;">
+            <h2 style="color: #5e35b1; text-align: center; font-family: 'Comfortaa', cursive;">All Dreams <span class="emoji">💭</span></h2>
             {% for dream in dreams %}
-                <div style="border: 1px solid #300258; background-color: #f7e3fd; padding: 15px; border-radius: 10px; margin-bottom: 10px;">
-                    <h3>{{ dream.title }}</h3>
+                <div style="border: 1px solid #5e35b1; background-color: #f3e5f5; padding: 15px; border-radius: 10px; margin-bottom: 10px; font-family: 'DM Sans', sans-serif;">
+                    <h3 style="color: #03376a;">{{ dream.title }}</h3>
                     <p><strong>Date:</strong> {{ dream.date }}</p>
                     <p><strong>Description:</strong> {{ dream.description }}</p>
                     <p><strong>Emotional State:</strong> {{ dream.get_emotional_state_display }}</p>
-                    <p><strong>Tags:</strong> 
-                        {% for tag in dream.tags.all %}
-                            <span class="badge badge-primary">{{ tag.name }}</span>
-                        {% endfor %}
-                    </p>
                 </div>
             {% empty %}
-                <p style="text-align: center;">No dreams to display.</p>
+                <p style="text-align: center; font-family: 'Comfortaa', cursive;">No dreams to display. <span class="emoji">😴</span></p>
             {% endfor %}
+        <script>
+            // Retrieve the counter value from localStorage or set it to 0 if it doesn't exist
+            let count = localStorage.getItem('counter') ? parseInt(localStorage.getItem('counter')) : 0;
+            // Display the counter value
+            document.getElementById('counter').innerText = count;
+
+            // Add an event listener to the button to increment the counter
+            document.getElementById('counterButton').addEventListener('click', function() {
+                count++;
+                document.getElementById('counter').innerText = count;
+                // Save the updated counter value to localStorage
+                localStorage.setItem('counter', count);
+            });
+        </script>
         </div>
     </div>
 {% endblock %}

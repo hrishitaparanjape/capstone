@@ -5,16 +5,10 @@
 {% block body %}
     <div style="margin-top: 20px; font-family: 'Trebuchet MS', sans-serif;">
         <h2 style="color: #03376a; text-align: center;">Dashboard</h2>
-        
+        <div id="streak-counter" style="text-align: center; font-size: 20px; margin-bottom: 20px;">
+            Streak: <span id="streak">0</span> days
+        </div>
         <form method="get" action="{% url 'dashboard' %}">
-            <div class="form-group">
-                <label for="tags">Filter by Tags:</label>
-                <select class="form-control" id="tags" name="tags" multiple="multiple">
-                    {% for tag in tags %}
-                        <option value="{{ tag.id }}">{{ tag.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
             <div class="form-group">
                 <label for="emotional_state">Filter by Emotional State:</label>
                 <select class="form-control" id="emotional_state" name="emotional_state">

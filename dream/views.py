@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from .models import User, Dream, Tag
+from .models import User, Dream
 
 def index(request):
     if request.user.is_authenticated:
@@ -63,31 +63,20 @@ def new_dream(request):
         title = request.POST["title"]
         description = request.POST["description"]
         date = request.POST["date"]
-        tags = request.POST.getlist("tags")
         emotional_state = request.POST["emotional_state"]
         dream = Dream(user=request.user, title=title, description=description, date=date, emotional_state=emotional_state)
         dream.save()
-        for tag_id in tags:
-            tag = Tag.objects.get(id=tag_id)
-            dream.tags.add(tag)
-        dream.save()
         return HttpResponseRedirect(reverse("index"))
     else:
-        tags = Tag.objects.all()
-        return render(request, "dream/new_dream.html", {
-            "tags": tags
-        })
+       
+        return render(request, "dream/new_dream.html")
 
 @login_required
 def dashboard(request):
-    tags = request.GET.getlist("tags")
     emotional_state = request.GET.get("emotional_state")
     dreams = Dream.objects.filter(user=request.user)
-    if tags:
-        dreams = dreams.filter(tags__id__in=tags).distinct()
     if emotional_state:
         dreams = dreams.filter(emotional_state=emotional_state)
     return render(request, "dream/dashboard.html", {
         "dreams": dreams,
-        "tags": Tag.objects.all()
     })

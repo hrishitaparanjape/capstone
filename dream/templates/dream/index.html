@@ -11,14 +11,11 @@
                 <p><strong>Date:</strong> {{ dream.date }}</p>
                 <p><strong>Description:</strong> {{ dream.description }}</p>
                 <p><strong>Emotional State:</strong> {{ dream.get_emotional_state_display }}</p>
-                <p><strong>Tags:</strong> 
-                    {% for tag in dream.tags.all %}
-                        <span class="badge badge-primary">{{ tag.name }}</span>
-                    {% endfor %}
-                </p>
             </div>
         {% empty %}
             <p style="text-align: center;">No dreams to display.</p>
         {% endfor %}
     </div>
+    
+
 {% endblock %}

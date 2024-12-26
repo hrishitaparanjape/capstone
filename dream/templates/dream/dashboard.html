@@ -3,13 +3,13 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block body %}
-<div style="margin-top: 20px;">
-    <h2 style="color: #5e35b1; text-align: center; font-family: 'Comfortaa', cursive;">Dashboard <span class="emoji">📊</span></h2>
-    <div style="text-align: center; margin-top: 20px;">
-        <button id="counterButton" style="background-color: #8cc4f5;">Did you log your Dream? <span class="emoji">🌙</span></button>
-        <p>Streak: <span class="emoji">🔥</span></p>
-        <span id="counter">0</span>
-    </div>
+    <div style="margin-top: 20px;">
+        <h2 style="color: #5e35b1; text-align: center; font-family: 'Comfortaa', cursive;">Dashboard <span class="emoji">📊</span></h2>
+        <div style="text-align: center; margin-top: 20px;">
+            <button id="counterButton">Did you log your Dream? <span class="emoji">🌙</span></button>
+            <p>Streak: <span class="emoji">🔥</span></p>
+            <span id="counter">0</span>
+        </div>
         <form method="get" action="{% url 'dashboard' %}">
             <div class="form-group">
                 <label for="emotional_state" style="font-family: 'Comfortaa', cursive;">Filter by Emotional State:</label>
@@ -22,9 +22,7 @@
                     <option value="angry">Angry <span class="emoji">😡</span></option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Filter</button>
         </form>
-
         <div style="margin-top: 20px;">
             <h2 style="color: #5e35b1; text-align: center; font-family: 'Comfortaa', cursive;">All Dreams <span class="emoji">💭</span></h2>
             {% for dream in dreams %}
@@ -38,8 +36,12 @@
                 <p style="text-align: center; font-family: 'Comfortaa', cursive;">No dreams to display. <span class="emoji">😴</span></p>
             {% endfor %}
         <script>
+            // Assuming you have a way to get the current username
+            const username = "{{ user.username }}";
+            const counterKey = `counter_${username}`;
+
             // Retrieve the counter value from localStorage or set it to 0 if it doesn't exist
-            let count = localStorage.getItem('counter') ? parseInt(localStorage.getItem('counter')) : 0;
+            let count = localStorage.getItem(counterKey) ? parseInt(localStorage.getItem(counterKey)) : 0;
             // Display the counter value
             document.getElementById('counter').innerText = count;
 
@@ -48,9 +50,17 @@
                 count++;
                 document.getElementById('counter').innerText = count;
                 // Save the updated counter value to localStorage
-                localStorage.setItem('counter', count);
+                localStorage.setItem(counterKey, count);
+            });
+
+            // Add an event listener to the reset button to reset the counter
+            document.getElementById('resetButton').addEventListener('click', function() {
+                count = 0;
+                document.getElementById('counter').innerText = count;
+                // Save the updated counter value to localStorage
+                localStorage.setItem(counterKey, count);
             });
         </script>
-        </div>
     </div>
 {% endblock %}
+

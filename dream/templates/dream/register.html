@@ -3,30 +3,35 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-<h2>Register</h2>
-<form action="{% url 'register' %}" method="post">
-    {% csrf_token %}
-    <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" class="form-control" id="username" name="username" required>
+    <div style="margin-top: 20px;">
+        <h2 style="color: #5e35b1; text-align: center; font-family: 'Comfortaa', cursive;">Register <span class="emoji">📝</span></h2>
+        <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username" style="font-family: 'Comfortaa', cursive;">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" required style="font-family: 'DM Sans', sans-serif;">
+            </div>
+            <div class="form-group">
+                <label for="email" style="font-family: 'Comfortaa', cursive;">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required style="font-family: 'DM Sans', sans-serif;">
+            </div>
+            <div class="form-group">
+                <label for="password" style="font-family: 'Comfortaa', cursive;">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" required style="font-family: 'DM Sans', sans-serif;">
+            </div>
+            <div class="form-group">
+                <label for="confirmation" style="font-family: 'Comfortaa', cursive;">Confirm Password:</label>
+                <input type="password" class="form-control" id="confirmation" name="confirmation" required style="font-family: 'DM Sans', sans-serif;">
+            </div>
+            <button type="submit" class="btn btn-primary" style="background-color: #81d4fa; color: #03376a; font-family: 'Comfortaa', cursive;">Register <span class="emoji">📝</span></button>
+        </form>
+        <p style="text-align: center; font-family: 'Comfortaa', cursive;">Already have an account? <a href="{% url 'login' %}">Login here <span class="emoji">🔑</span></a>.</p>
     </div>
-    <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" name="email" required>
-    </div>
-    <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" class="form-control" id="password" name="password" required>
-    </div>
-    <div class="form-group">
-        <label for="confirmation">Confirm Password:</label>
-        <input type="password" class="form-control" id="confirmation" name="confirmation" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Register</button>
-</form>
-{% if message %}
-    <div class="alert alert-danger" role="alert">
-        {{ message }}
-    </div>
-{% endif %}
 {% endblock %}
+
+
+
+<div class="form-group">
+    <label for="confirmation">Confirm Password:</label>
+    <input type="password" class="form-control" id="confirmation" name="confirmation" required>
+</div>
